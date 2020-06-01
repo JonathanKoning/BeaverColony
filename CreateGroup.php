@@ -12,7 +12,7 @@
             <h2>Create a Group</h2>
         </div>
         <div id="formDiv">
-            <form>
+            <form action="HomePage.php" method="get">
                 <?php
                     session_start();
                     $onid=$_SESSION['onid'];
@@ -74,7 +74,7 @@
                     }
                     echo "</select><br>";
                 ?>
-                <button type="submit" id="submitButton" action="HomePage.php" method="get">Create Group</button>
+                <button type="submit" id="submitButton">Create Group</button>
             </form>
         </div>
     </body>
