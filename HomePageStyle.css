@@ -1,0 +1,93 @@
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #fff5ee;
+}
+.topRight{
+    position:absolute;
+    top:0;
+    right:0;
+}
+
+#BeaverDescription{
+    background-color: #FFB500;
+    text-align: center;
+    width: auto;
+    height: 60px;
+}
+
+.outer{
+    position: relative;
+    margin: auto;
+    width: 50%;
+}
+
+#Buttons {
+    text-align: center;
+    width: 35%;
+}
+
+.Classbox{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    margin: 2%;
+    margin-left: 0%;
+    padding: 5%;
+    padding-bottom: 10%;
+    padding-top: 0%;
+    height: 10px;
+}
+
+
+.options {
+    display: inline-block;
+    position: relative;
+}
+
+#List {
+    background-color: #ff8243;
+}
+
+#Create {
+    background-color: lightblue;
+}
+
+.box {
+    position: relative;
+    display: inline-block;
+    /* width: 20%; */
+    /* height: 100px; */
+    text-align: center;
+    margin: 2%;
+    margin-left: 0%;
+    padding: 5%;
+    padding-bottom: 10%;
+    padding-top: 0%;
+    min-width: 100px;
+}
+
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    color: gray;
+}
+
+h3 {
+    display: inline-block;
+    font-weight: 100;
+}
+
+h4{
+    font-size: larger;
+    font-weight: bold;
+}
+
+form {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

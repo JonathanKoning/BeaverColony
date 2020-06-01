@@ -1,0 +1,76 @@
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #fff5ee;
+    text-align: center;
+}
+
+#header{
+    text-align: center;
+}
+
+.topRight{
+    position:absolute;
+    top:0;
+    right:0;
+}
+
+h2{
+    color: gray;
+}
+#formDiv{
+    margin: auto;
+    display: block;
+    text-align: center;
+    margin-top: 100px;
+    border-radius: 25px;
+    background-color: #ff8243;
+    height: 300px;
+    width: 500px;
+}
+
+form{
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    font-weight: bold;
+}
+
+#Day{
+    height: 25px;
+    width: 400px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    border-radius: 25px;
+}
+#Time{
+    height: 25px;
+    width: 400px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border-radius: 25px;
+}
+#BuildingName{
+    height: 25px;
+    width: 400px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border-radius: 25px;
+}
+#Room{
+    height: 25px;
+    width: 400px;
+    margin-top: 5px;
+    border-radius: 25px;
+}
+
+#submitButton{
+    margin-top: 60px;
+    border-radius: 25px;
+    height: 65px;
+    width: 150px;
+    background-color: #ff8243;
+    font-weight: bold;
+    font-size: medium;
+}
