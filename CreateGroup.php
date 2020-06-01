@@ -25,22 +25,6 @@
                         echo "<option value = 'Class'>" .$row['Subject'], $row['Number']. "</option>";
                     }
                     echo "</select><br>";
-                    //echo "<label for='Day'>Day</label><br>";
-                    //echo "<select id='Day' Day='Day'><br>";
-                        /*echo "<option value = 'Monday'>Monday</option>";
-                        echo "<option value = 'Tuesday'>Tuesday</option>";
-                        echo "<option value = 'Wednesday'>Wednesday</option>";
-                        echo "<option value = 'Thursday'>Thursday</option>";
-                        echo "<option value = 'Friday'>Friday</option>";
-                        echo "<option value = 'Saturday'>Saturday</option>";
-                        echo "<option value = 'Sunday'>Sunday</option>";
-                */
-                //<label for="Time">Time</label><br>
-                //<input type="text" id="Time" Time="Time"><br>
-                //<label for="BuildingName">Building Name</label><br>
-                //<input type="text" id="BuildingName" BuildingName="BuildingName"><br>
-            //</form>
-
                 ?>
                 <label for="Day">Day</label><br>
                 <select id="Day" Day="Day">
@@ -52,8 +36,34 @@
                     <option value = "Saturday">Saturday</option>
                     <option value = "Sunday">Sunday</option>
                 </select><br> 
-                <label for="Time">Time</label><br>
-                <input type="text" id="Time" Time="Time"><br>
+                <label for="Time">Time(24 Hour)</label><br>
+                <select id="Time" Time="Time"><br>
+                    <option value ="0000"><00:00</option>
+                    <option value ="0100"><01:00</option>
+                    <option value ="0200"><02:00</option>   
+                    <option value ="0300"><03:00</option>
+                    <option value ="0400"><04:00</option>
+                    <option value ="0500"><05:00</option>
+                    <option value ="0600"><06:00</option>
+                    <option value ="0700"><07:00</option>
+                    <option value ="0800"><08:00</option>   
+                    <option value ="0900"><09:00</option>
+                    <option value ="1000"><10:00</option>
+                    <option value ="1100"><11:00</option>
+                    <option value ="1200"><12:00</option>
+                    <option value ="1300"><13:00</option>
+                    <option value ="1400"><14:00</option>
+                    <option value ="1500"><15:00</option>
+                    <option value ="1600"><16:00</option>
+                    <option value ="1700"><17:00</option>
+                    <option value ="1800"><18:00</option>
+                    <option value ="1900"><19:00</option>
+                    <option value ="2000"><20:00</option>
+                    <option value ="2100"><21:00</option>
+                    <option value ="2200"><22:00</option>
+                    <option value ="2300"><23:00</option>
+                    <option value ="2400"><24:00</option>
+                </select><br> 
                 <?php
                     $query = "SELECT Name FROM Building";
                     $result = mysqli_query($con, $query);
@@ -64,13 +74,8 @@
                     }
                     echo "</select><br>";
                 ?>
-                <!--<label for="BuildingName">Building Name</label><br>
-                <input type="text" id="BuildingName" BuildingName="BuildingName"><br> -->
+                <button type="submit" id="submitButton" action="HomePage.php" method="get">Create Group</button>
             </form>
         </div>
-
-        <form method="get" action="HomePage.php">
-        <button type="submit" id="submitButton">Create Group</button>
-        </form>
     </body>
 </html>
