@@ -69,7 +69,7 @@
             </form>
         </div>
 
-        <form method="get" action="HomePage.html">
+        <form method="get" action="HomePage.php">
         <button type="submit" id="submitButton">Create Group</button>
         </form>
     </body>

@@ -25,8 +25,12 @@
             <?php
                 session_start();
                 require_once "connect.php";
-                $_SESSION['onid']=$_GET['onid'];
-                $name=$_GET['onid'];
+                if($_SESSION['onid'])
+                    $name=$_SESSION['onid'];
+                else
+                    $_SESSION['onid']=$_GET['onid'];
+                    $name=$_SESSION['onid'];
+                //$name=$_GET['onid'];
                 //echo "<h1>" . $_SESSION["onid"] . "</h1>";
                 $query = "SELECT * FROM participates_in where ONID='$name'";
                 $result = mysqli_query($con, $query);
