@@ -8,9 +8,8 @@
 
   <h1>Beaver Colony</h1>
   <h3 style="color:grey;">Course Name</h3>
-  <div class="topRight">Username</div>
   <div class="create">
-      <a href="CreateGroup.html">Create a Group</a>
+      <a href="CreateGroup.php">Create a Group</a>
   </div>
 
 
