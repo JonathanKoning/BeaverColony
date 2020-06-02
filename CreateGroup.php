@@ -12,7 +12,7 @@
             <h2>Create a Group</h2>
         </div>
         <div id="formDiv">
-            <form action="HomePage.php" method="get">
+            <form method="get" action="Confirmation.php">
                 <?php
                     session_start();
                     $onid=$_SESSION['onid'];
@@ -20,14 +20,20 @@
                     $query = "SELECT Subject, Number FROM has where ONID='$onid'";
                     $result = mysqli_query($con, $query);
                     echo "<label for='classes'>Class</label><br>";
-                    echo "<select id='classes' classes='Class'>";
+                    
+                    echo "<select id='classes' name=Class>";
+                    $number = 0;
                     while($row = mysqli_fetch_array($result)){
-                        echo "<option value = 'Class'>" .$row['Subject'], $row['Number']. "</option>";
+                        //$class=$row['Subject']; 
+                        //$subj = $row['Number'];
+
+                        echo "<option value = '$number'>" .$row['Subject'], $row['Number']. "</option>";
+                        $number++; 
                     }
                     echo "</select><br>";
                 ?>
                 <label for="Day">Day</label><br>
-                <select id="Day" Day="Day">
+                <select id="Day" name="Day">
                     <option value = "Monday">Monday</option>
                     <option value = "Tuesday">Tuesday</option>
                     <option value = "Wednesday">Wednesday</option>
@@ -37,7 +43,7 @@
                     <option value = "Sunday">Sunday</option>
                 </select><br> 
                 <label for="Time">Time(24 Hour)</label><br>
-                <select id="Time" Time="Time"><br>
+                <select id="Time" name="Time"><br>
                     <option value ="0000">00:00</option>
                     <option value ="0100">01:00</option>
                     <option value ="0200">02:00</option>   
@@ -67,10 +73,12 @@
                 <?php
                     $query = "SELECT Name FROM Building";
                     $result = mysqli_query($con, $query);
+                    $counter=0;
                     echo "<label for='Bname'>Building</label><br>";
-                    echo "<select id='Bname' Bname='bname'>";
+                    echo "<select id='Bname' name='bname'>";
                     while($row = mysqli_fetch_array($result)){
-                        echo "<option value='bname'>" . $row['Name'] . "</option>";
+                        echo "<option value='$counter'>" . $row['Name'] . "</option>";
+                        $counter++;
                     }
                     echo "</select><br>";
                 ?>
