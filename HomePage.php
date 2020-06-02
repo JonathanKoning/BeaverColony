@@ -9,18 +9,8 @@
         <div id="BeaverDescription">
             <h3>A resource to collaborate, help, and connect with others to further the success of your academic carreer</h3>
         </div>
-        <div id="Buttons" class="outer">
-            <form class="options" method="get" action="GroupListing.php">
-                <button id="List" type="submit">Search Groups</button>
-            </form>
-            <form class="options" method="get" action="CreateGroup.php">
-                <button id="Create" type="submit">Create Group</button>
-            </form>
-
-        </div>
-
         
-        <div class="outer">
+        <div class="GroupDiv">
             <h4>Your Groups</h4>
             <?php
                 session_start();
@@ -30,45 +20,24 @@
                 else
                     $_SESSION['onid']=$_GET['onid'];
                     $name=$_SESSION['onid'];
-                //$name=$_GET['onid'];
-                //echo "<h1>" . $_SESSION["onid"] . "</h1>";
                 $query = "SELECT * FROM participates_in where ONID='$name'";
                 $result = mysqli_query($con, $query);
                 while($row = mysqli_fetch_array($result)){
-                    echo"<div class='box' style='background-color: #ff8243;'>";
+                    echo"<div class='box'>";
                     echo"<p>". $row['GroupID']."<p>";
                     echo"<form method='get' action='#'>";
-                    echo"<button type='submit'>-</button>";
+                    echo"<button title='Remove group' id='removeBtn' type='submit'>-</button>";
                     echo"</form>";
                     echo"</div>";
-                    
                 }
                 mysqli_close($con);
             ?>
-            <!-- <div class="box" style="background-color: #ff8243;">
-                <p>Group Name</p>
-                <form method="get" action="#">
-                    <button type="submit">-</button>
-                </form>
+        </div>
+        <div id="outerBtnDiv">
+            <div id="innerBtnDiv">
+                <button id="ListBtn" type="submit" onclick="window.location.href='GroupListing.php'">Search Groups</button>
+                <button id="CreateBtn" type="submit" onclick="window.location.href='CreateGroup.php'">Create Group</button>
             </div>
-            <div class="box" style="background-color: #ff8243;">
-                <p>Group Name</p>
-                <form method="get" action="#">
-                    <button type="submit">-</button>
-                </form>
-            </div>
-            <div class="box" style="background-color: #ff8243;">
-                <p>Group Name</p>
-                <form method="get" action="#">
-                    <button type="submit">-</button>
-                </form>
-            </div>
-            <div class="box" style="background-color: #ff8243;">
-                <p>Group Name</p>
-                <form method="get" action="#">
-                    <button type="submit">-</button>
-                </form>
-            </div> -->
         </div>
     </body>
 </html>
