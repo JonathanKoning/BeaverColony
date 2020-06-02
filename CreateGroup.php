@@ -82,7 +82,9 @@
                     }
                     echo "</select><br>";
                 ?>
-                <button type="submit" id="submitButton">Create Group</button>
+                <div id="buttonDiv">
+                    <button type="submit" id="submitButton">Create Group</button>
+                </div>
             </form>
         </div>
     </body>
