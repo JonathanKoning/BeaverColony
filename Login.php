@@ -1,30 +1,33 @@
 <?php
     //session
-    //session_start();
-    //$_SESSION["onid"] = $_GET['onid'];
-    /*if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    session_start();
+    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         header("location: HomePage.php");
-        exit;*/
+        exit;
+    }
+    
     //variables
-    /*$onidLogin = "";
+    $onidLogin = "";
     $onidLogin_err = "";
     
     //connecting to DB
     require_once "connect.php";
     
-    $onidLogin = $_GET['onid'];
-    $sql = "SELECT ONID FROM Student WHERE ONID='$onidLogin'";
-    if(mysqli_stmt_num_rows($stmt) == 1){
-        //$_SESSION["loggedin"] = true;
-        $_SESSION['onid'] = $onidLogin;
+    $onidLogin = $_POST["onid"];
+    $sql = "SELECT ONID FROM Student WHERE ONID = '$onidLogin'";
+    $result = mysqli_query($con, $sql);
+
+    if(mysqli_num_rows($result) == 1){
+        $_SESSION["loggedin"] = true;
+        $_SESSION["onid"] = $onidLogin;
         header("location: HomePage.php");
+        exit;
     } else{
         // Display an error message if ONID is not valid
         $onidLogin_err = "Please enter a valid ONID.";
     }
-    mysqli_stmt_close($stmt);
+    mysqli_stmt_close($result);
     mysqli_close($con);
-    */
 ?>
 
 <!DOCTYPE html>
@@ -34,22 +37,16 @@
     </head>
     <body>
         <h1 id="webName">Beaver Colony</h1>
-        <?php
-            //echo "<h1>" . $_SESSION["onid"] . "</h1>"
-        //session_start();
-        //$name = $_GET['onid'];
-        //$_SESSION["onid"] = $name;
-        echo "<div id='bigContainer'>";
-            echo "<img src='campus_pic.jpg'>";
-            echo "<div class='formContainer'>";
-                echo "<h2 id='pageName'>Login</h2>";
-                echo "<form class='formInner' action='HomePage.php' method='get'>";
-                    echo "<label for='onid'><b>ONID</b></label>";
-                    echo "<input type='text' placeholder='Enter ONID' name='onid' required>";
-                    echo "<button type='submit' class='btn'>Login</button>";
-                echo "</form>";
-            echo "</div>";
-        echo "</div>";
-        ?>
+        <div id="bigContainer"> 
+            <img src="campus_pic.jpg">
+            <div class="formContainer">
+                <h2 id="pageName">Login</h2>
+                <form class="formInner" action="" method="post">
+                    <label for="onid"><b>ONID</b></label>
+                    <input type="text" placeholder="Enter ONID" name="onid" required>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
