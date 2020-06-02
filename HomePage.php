@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,13 +16,10 @@
         <div class="GroupDiv">
             <h4>Your Groups</h4>
             <?php
-                session_start();
                 require_once "connect.php";
-                if($_SESSION['onid'])
+                if($_SESSION['onid']){
                     $name=$_SESSION['onid'];
-                else
-                    $_SESSION['onid']=$_GET['onid'];
-                    $name=$_SESSION['onid'];
+                }
                 $query = "SELECT * FROM participates_in where ONID='$name'";
                 $result = mysqli_query($con, $query);
                 while($row = mysqli_fetch_array($result)){
