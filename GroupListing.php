@@ -24,7 +24,7 @@
             0/15
           </div>
           <div class="joinButton">
-            <form method="get" action="HomePage.html">
+            <form method="get" action="HomePage.php">
               <button type="submit"> Join</button>
             </form>
         </div>
