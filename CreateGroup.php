@@ -12,7 +12,7 @@
             <h2>Create a Group</h2>
         </div>
         <div id="formDiv">
-            <form>
+            <form method="get" action="Confirmation.php">
                 <?php
                     session_start();
                     $onid=$_SESSION['onid'];
@@ -20,30 +20,20 @@
                     $query = "SELECT Subject, Number FROM has where ONID='$onid'";
                     $result = mysqli_query($con, $query);
                     echo "<label for='classes'>Class</label><br>";
-                    echo "<select id='classes' classes='Class'>";
+                    
+                    echo "<select id='classes' name=Class>";
+                    $number = 0;
                     while($row = mysqli_fetch_array($result)){
-                        echo "<option value = 'Class'>" .$row['Subject'], $row['Number']. "</option>";
+                        //$class=$row['Subject']; 
+                        //$subj = $row['Number'];
+
+                        echo "<option value = '$number'>" .$row['Subject'], $row['Number']. "</option>";
+                        $number++; 
                     }
                     echo "</select><br>";
-                    //echo "<label for='Day'>Day</label><br>";
-                    //echo "<select id='Day' Day='Day'><br>";
-                        /*echo "<option value = 'Monday'>Monday</option>";
-                        echo "<option value = 'Tuesday'>Tuesday</option>";
-                        echo "<option value = 'Wednesday'>Wednesday</option>";
-                        echo "<option value = 'Thursday'>Thursday</option>";
-                        echo "<option value = 'Friday'>Friday</option>";
-                        echo "<option value = 'Saturday'>Saturday</option>";
-                        echo "<option value = 'Sunday'>Sunday</option>";
-                */
-                //<label for="Time">Time</label><br>
-                //<input type="text" id="Time" Time="Time"><br>
-                //<label for="BuildingName">Building Name</label><br>
-                //<input type="text" id="BuildingName" BuildingName="BuildingName"><br>
-            //</form>
-
                 ?>
                 <label for="Day">Day</label><br>
-                <select id="Day" Day="Day">
+                <select id="Day" name="Day">
                     <option value = "Monday">Monday</option>
                     <option value = "Tuesday">Tuesday</option>
                     <option value = "Wednesday">Wednesday</option>
@@ -57,19 +47,22 @@
                 <?php
                     $query = "SELECT Name FROM Building";
                     $result = mysqli_query($con, $query);
+                    $counter=0;
                     echo "<label for='Bname'>Building</label><br>";
-                    echo "<select id='Bname' Bname='bname'>";
+                    echo "<select id='Bname' name='bname'>";
                     while($row = mysqli_fetch_array($result)){
-                        echo "<option value='bname'>" . $row['Name'] . "</option>";
+                        echo "<option value='$counter'>" . $row['Name'] . "</option>";
+                        $counter++;
                     }
                     echo "</select><br>";
                 ?>
                 <!--<label for="BuildingName">Building Name</label><br>
                 <input type="text" id="BuildingName" BuildingName="BuildingName"><br> -->
+            <button type="submit" id="submitButton">Create Group</button>
             </form>
         </div>
 
-        <form method="get" action="HomePage.php">
+        <form method="get" action="Confirmation.php">
         <button type="submit" id="submitButton">Create Group</button>
         </form>
     </body>
