@@ -6,72 +6,59 @@ body{
 
 h1 {
   text-align: center;
-}
-
-.topRight{
-    position:absolute;
-    top:0;
-    right:0;
+  color: black;
 }
 
 h3 {
   text-align: center;
-  margin: 0px;
+  color: gray;
+}
+
+a{
+  text-decoration: none;
+  color: black;
 }
 
 .create {
   text-align: center;
-  padding-bottom: 15px;
+}
+
+#CreateGroupbtn{
+  margin-top: 15px;
+  background-color: #FFB500;
+  border: none;
+  width: 200px;
+  height: 50px;
 }
 
 #listingBox{
   display: inline-block;
-  margin-top: 50px;
+  margin-top: 40px;
   background-color: #FDD26E;
-  height: 400px;
-  width: 600px;
+  height: 100%;
+  width: 80%;
 }
 
 .listing {
   display: inline-block;
-  width: 50%;
+  width: 90%;
   height: 50px;
-  /*position: absolute;*/
+  margin-top: 2%;
+  margin-right: 2%;
+  margin-bottom: 2%;
   background-color: #FFB500;
   color: black;
-  border: 4px #FFB500;
-  border-style: outset;
-  /*margin-left: 300px;
-  margin-top: 50px;
-  margin-bottom: 20px;*/
-  border-radius: 25px;
 }
 
-.info {position: absolute;}
-
-.info2 {
-  position: absolute;
-  right: 0px;
-  margin-right: 65px;
-  margin-top: 15px;
-}
-
-.joinButton {
-  position: relative;
+#joinButton{
+  background-color: black;
+  border: none;
+  color: white;
+  height: 50px;
+  width: 60px;
   float: right;
-  margin-right: 55px;
 }
 
-form {
-  position: absolute;
+button:hover{
+  transform: scale(1.1);
 }
-
-button {
-  padding: 16px 15px;
-  border: 1px solid black;
-  background-color: #FFB500;
-  border-radius: 25px;
-  color: black;
-}
-
-button:hover {background-color: black;}
