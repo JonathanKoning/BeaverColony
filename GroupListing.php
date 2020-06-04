@@ -1,8 +1,8 @@
-<!DOCTYPE html>
 <?php
     session_start();
-    require_once "connect.php";
+    require_once "connect.php";    
 ?>
+<!DOCTYPE html>
 
 <html lang="en" dir="ltr">
   <head>
@@ -11,7 +11,7 @@
   </head>
 
   <h1><a href="HomePage.php">Beaver Colony</h1>
-  <h3>Course Name</h3> 
+  <h3>Course Name</h3>
   <div class="createDiv">
       <button id="CreateGroupbtn" type="submit" action="CreateGroup.php">Create a Group</a>
   </div>
