@@ -17,8 +17,6 @@
             <h4>Your Groups</h4>
             <?php
                 require_once "connect.php";
-                $val = $_POST['join'];
-                print_r($_GET);
                 if($_SESSION['onid']){
                     $name=$_SESSION['onid'];
                 }

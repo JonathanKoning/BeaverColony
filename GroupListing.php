@@ -38,7 +38,7 @@
                 {
                     echo "<br> Problem selecting groups" . mysqli_error($con);
                 }
-                //print_r($result);
+               
                 $result = mysqli_query($con, $query);
                 while($row = mysqli_fetch_array($result)){
                     //echo "<p>". $row['ID']."<p>";
@@ -50,13 +50,27 @@
                     echo "<button id='joinButton' value='$group' type='submit'> Join</button>";
                     echo "</form>";
                 }
+                //Get new group ID
                 $val = $_GET['join'];
                 $query = "INSERT INTO `participates_in` (`ONID`, `GroupID`) VALUES ('$name', '$val')";
                 $result = mysqli_query($con,$query);
+                
+                //Get number of students from joined group
+                $querey = "SELECT `NumStudents` FROM `Group` WHERE ID=$val";
+                $res = mysqli_query($con, $query);
+                $row = mysqli_fetch_array($res);
+                $num = $row['NumStudents'];
+                
+                //Update number of students in group
+                $newnum = (int)$num + 1;
+                $query = "UPDATE `Group` SET NumStudents=$newnum WHERE ID=$val";
+                if(mysqli_query($con, $query)){
+                    echo "<br> Succes inserting group";
+                } else{
+                    echo "<br> Problem updating numstudents" . mysqli_error($con);
+                }
+
             ?>
-           <!-- <form method="get" action="HomePage.php">
-              <button id="joinButton" type="submit"> Join</button>
-            </form> -->
         </div>
    </div>
   </body>
