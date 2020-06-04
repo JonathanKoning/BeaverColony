@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -10,8 +14,7 @@
         <?php
             $counter=0;
             $number = $_GET['Class'];
-            
-            session_start();
+           
             $onid=$_SESSION['onid'];
             require_once "connect.php";
             $query = "SELECT Subject, Number, Section FROM has where ONID='$onid'";
