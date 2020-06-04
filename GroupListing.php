@@ -56,14 +56,14 @@
                 $result = mysqli_query($con,$query);
                 
                 //Get number of students from joined group
-                $querey = "SELECT `NumStudents` FROM `Group` WHERE ID=$val";
+                $query = "SELECT `NumStudents` FROM `Group` WHERE ID=$val";
                 $res = mysqli_query($con, $query);
                 $row = mysqli_fetch_array($res);
                 $num = $row['NumStudents'];
                 
                 //Update number of students in group
                 $newnum = (int)$num + 1;
-                $query = "UPDATE `Group` SET NumStudents=$newnum WHERE ID=$val";
+                $query = "UPDATE `Group` SET NumStudents='$newnum' WHERE ID='$val'";
                 if(mysqli_query($con, $query)){
                     echo "<br> Succes inserting group";
                 } else{
