@@ -28,22 +28,35 @@
                 $isin = mysqli_query($con, $query);
                 //$query = "SELECT * FROM Group where (GroupID!=$isin[])";
 
-                $query = "SELECT * FROM Group where ID NOT IN(SELECT GroupID FROM participates_in where ONID = $name) AND Subject IN(SELECT Subject FROM has WHERE ONID=$name) AND SECTION IN(SELECT Section FROM has WHERE ONID=$name) AND Number IN(SELECT Number FROM has WHERE ONID=$name)";
-                $result = mysqli_query($con, $query);
-                print_r($result);
-                while($row = mysqli_fetch_array($result)){
-                    echo"<div class='box'>";
-                    echo"<p>". $row['ID']."<p>";
-                    echo"<form method='get' action='#'>";
-                    echo"<button title='Remove group' id='removeBtn' type='submit'>-</button>";
-                    echo"</form>";
-                    echo"</div>";
+                $query = "SELECT * FROM `Group` WHERE (`ID` NOT IN (SELECT `GroupID` FROM `participates_in` WHERE ONID='$name') AND `Subject` IN (SELECT `Subject` FROM `has` WHERE ONID='$name') AND `SECTION` IN (SELECT `Section` FROM `has` WHERE ONID='$name') AND `Number` IN (SELECT `Number` FROM `has` WHERE ONID='$name'))";
+                
+                if(mysqli_query($con, $query))
+                {
+                    echo"<br> Success.";
                 }
-
+                else
+                {
+                    echo "<br> Problem selecting groups" . mysqli_error($con);
+                }
+                //print_r($result);
+                $result = mysqli_query($con, $query);
+                while($row = mysqli_fetch_array($result)){
+                    //echo "<p>". $row['ID']."<p>";
+                    $group = $row['ID'];
+                    $subj = $row['Subject'];
+                    $class = $row['Number'];
+                    echo "<form method='get' action='#'>";
+                    echo "<input type='hidden' name='join' value='$group'>". $group. " ". $subj, $class ."</input>";
+                    echo "<button id='joinButton' value='$group' type='submit'> Join</button>";
+                    echo "</form>";
+                }
+                $val = $_GET['join'];
+                $query = "INSERT INTO `participates_in` (`ONID`, `GroupID`) VALUES ('$name', '$val')";
+                $result = mysqli_query($con,$query);
             ?>
-            <form method="get" action="HomePage.php">
+           <!-- <form method="get" action="HomePage.php">
               <button id="joinButton" type="submit"> Join</button>
-            </form>
+            </form> -->
         </div>
    </div>
   </body>
