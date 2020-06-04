@@ -5,14 +5,14 @@
         header("location: HomePage.php");
         exit;
     }
-    
+
     //variables
     $onidLogin = "";
     $onidLogin_err = "";
-    
+
     //connecting to DB
     require_once "connect.php";
-    
+
     $onidLogin = $_POST["onid"];
     $sql = "SELECT ONID FROM Student WHERE ONID = '$onidLogin'";
     $result = mysqli_query($con, $sql);
@@ -37,7 +37,7 @@
     </head>
     <body>
         <h1 id="webName">Beaver Colony</h1>
-        <div id="bigContainer"> 
+        <div id="bigContainer">
             <img src="campus_pic.jpg">
             <div class="formContainer">
                 <h2 id="pageName">Login</h2>
