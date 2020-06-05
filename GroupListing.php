@@ -11,6 +11,7 @@
   </head>
 
   <h1><a href="HomePage.php">Beaver Colony</h1>
+  <button id="logoutBtn" type="submit" onclick="window.location.href='Logout.php'">Logout</button>
   <h3>Course Name</h3>
   <div class="createDiv">
       <button id="CreateGroupbtn" type="submit" action="CreateGroup.php">Create a Group</a>
