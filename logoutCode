@@ -1,0 +1,15 @@
+--HTML
+<button id="logoutBtn" type="submit" onclick="window.location.href='Logout.php'">Logout</button>
+--CSS
+#logoutBtn{
+    position:fixed;
+    right:10px;
+    top:5px;
+    background-color: black;
+    color: white;
+    border: none;
+    font-weight: 100;
+    font-size: small; 
+    height: 30px;
+    cursor: pointer;
+}
