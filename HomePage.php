@@ -8,6 +8,7 @@
     </head>
     <body>
         <h1>Beaver Colony</h1>
+        <button id="logoutBtn" type="submit" onclick="window.location.href='Logout.php'">Logout</button>
         <h2>Home</h2>
         <div id="BeaverDescription">
             <h3>A resource to collaborate, help, and connect with others to further the success of your academic carreer</h3>
