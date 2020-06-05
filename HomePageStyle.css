@@ -54,7 +54,8 @@ h4{
 }
 
 form {
-    position: absolute;
+    position: relative;
+    height: 100%;
     bottom: 0;
     right: 0;
 }
@@ -64,6 +65,7 @@ button:hover{
 }
 
 #removeBtn{
+    position: absolute;
     background-color: black;
     color: white;
     border: none;
@@ -71,6 +73,8 @@ button:hover{
     font-size: large;
     height: 20px;
     cursor: pointer;
+    bottom: 0;
+    right: 0;
     border-radius: 5px;
 }
 

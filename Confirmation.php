@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -18,17 +22,18 @@
         <?php
             $counter=0;
             $number = $_GET['Class'];
-
-            session_start();
+           
             $onid=$_SESSION['onid'];
             require_once "connect.php";
-            $query = "SELECT Subject, Number FROM has where ONID='$onid'";
-            $result = mysqli_query($con, $query);
+            $query = "SELECT Subject, Number, Section FROM has where ONID='$onid'";
+            $result = mysqli_query($con, $query);               
+            
 
             while($row = mysqli_fetch_array($result)){
                 if($counter == (int)$number){
                     $subj=$row['Subject'];
                     $class=$row['Number'];
+                    $section=$row['Section'];
                 }
                 $counter++;
             }
@@ -49,8 +54,60 @@
                 }
                 $counter++;
             }
-            echo "<h3>" . $Building . "</h3>";
-            echo"</div>";
+            echo "<h1>" . $Building . "</h1>"; 
+            
+            $Time=$_GET['Time'];
+            echo "<h1>" . $_GET['Time'] . "</h1>";
+
+            //Create new group
+            $query= "INSERT INTO `Group` (`ID`, `NumStudents`, `ModeratorONID`,`Subject`, `Number`, `Section`) 
+            VALUES (NULL,0,'$onid','$subj','$class', '$section')";
+            if(mysqli_query($con, $query)){
+                echo "<br> Succes inserting group";
+            } else{
+                echo "<br> Problem inserting" . mysqli_error($con);
+            }
+    
+            //Get group ID of new group
+            $query = "SELECT ID FROM `Group` WHERE NumStudents = 0";
+            $GID = mysqli_query($con, $query);
+            $row = mysqli_fetch_array($GID);
+            $group = $row['ID'];
+            echo "<h1>" .$group . "</h1>";
+            $query = "INSERT INTO `Meeting` (`MeetingID`, `Day`, `Time`, `BuildingName`, `GroupID`)
+            VALUES (NULL, '$Day', '$Time', '$Building', '$group')";
+            if(mysqli_query($con, $query)){
+                echo "<br> Succes inserting group";
+            } else{
+                echo "<br> Problem inserting into Meeting" . mysqli_error($con);
+            }
+
+            //Update number of students in Group
+            $query = "UPDATE `Group` SET NumStudents=1 WHERE NumStudents=0";
+            //$query = mysqli_query($con, $query);
+            if(mysqli_query($con, $query)){
+                echo "<br> Succes inserting group";
+            } else{
+                echo "<br> Problem updating numstudents" . mysqli_error($con);
+            }
+
+            //Put user into participates in
+            $query = "INSERT INTO `participates_in` (`ONID`, `GroupID`) VALUES ('$onid', '$group')";
+            if(mysqli_query($con, $query)){
+                echo "<br> Succes inserting into participates";
+            } else{
+                echo "<br> Problem inserting into participates in" . mysqli_error();
+            }
+
+            //$query = "SELECT `ID` FROM `Group` INNER JOIN `MEETING` WHERE `Group`.`ID` = `MEETING`.`GroupID`";
+
+            //$groupID = mysqli_query($con, $query);
+
+            //while($row = mysqli_fetch_array($groupID))
+            //{
+              //  echo"<h1>". $row['ID'] ."</h1>";
+            //}
+            
 
         ?>
 
