@@ -5,8 +5,10 @@ body{
 }
 
 h1 {
+  background: url(Rectangle.jpg);
   text-align: center;
-  color: black;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 
 h3 {
@@ -29,6 +31,7 @@ a{
   border: none;
   width: 200px;
   height: 50px;
+  border-radius: 25px;
 }
 
 #listingBox{
@@ -37,6 +40,7 @@ a{
   background-color: #FDD26E;
   height: 100%;
   width: 80%;
+  border-radius: 15px;
 }
 
 .listing {

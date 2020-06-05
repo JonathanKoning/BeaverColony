@@ -3,7 +3,10 @@ body{
     background-color: #fff5ee;
 }
 h1 {
+    background: url(Rectangle.jpg);
     text-align: center;
+    -webkit-text-fill-color: transparent;
+ 	  -webkit-background-clip: text;
 }
 
 h2 {
@@ -14,18 +17,24 @@ h2 {
 h3 {
     display: inline-block;
     font-weight: 100;
+
 }
 
 h4{
     font-size: larger;
     font-weight: bold;
+    text-decoration: underline;
 }
 
 #BeaverDescription{
     background-color: #FFB500;
     text-align: center;
     width: auto;
-    height: 60px;
+    height: 54px;
+    opacity: 0.8;
+    border-radius: 80px;
+
+
 }
 
 .GroupDiv{
@@ -41,6 +50,7 @@ h4{
     background-color: #ff8243;
     display: inline-block;
     margin: 3%;
+    border-radius: 5px;
 }
 
 form {
@@ -60,11 +70,12 @@ button:hover{
     color: white;
     border: none;
     font-weight: 300;
-    font-size: large; 
+    font-size: large;
     height: 20px;
     cursor: pointer;
     bottom: 0;
     right: 0;
+    border-radius: 5px;
 }
 
 #outerBtnDiv{
@@ -78,19 +89,21 @@ button:hover{
 #ListBtn{
     margin: 5%;
     width: 200px;
-    height: 45px;
+    height: 50px;
     background-color:black;
     border: none;
     color: white;
     cursor: pointer;
+    border-radius: 15px;
 }
 
 #CreateBtn{
     margin: 5%;
     width: 200px;
-    height: 45px;
+    height: 50px;
     background-color:black;
     border: none;
     color: white;
     cursor: pointer;
+    border-radius: 15px;
 }

@@ -12,7 +12,7 @@
         <div id="BeaverDescription">
             <h3>A resource to collaborate, help, and connect with others to further the success of your academic carreer</h3>
         </div>
-        
+
         <div class="GroupDiv">
             <h4>Your Groups</h4>
             <?php
@@ -76,4 +76,3 @@
         </div>
     </body>
 </html>
-

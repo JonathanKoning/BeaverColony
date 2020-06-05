@@ -20,15 +20,15 @@
                     $query = "SELECT Subject, Number FROM has where ONID='$onid'";
                     $result = mysqli_query($con, $query);
                     echo "<label for='classes'>Class</label><br>";
-                    
+
                     echo "<select id='classes' name=Class>";
                     $number = 0;
                     while($row = mysqli_fetch_array($result)){
-                        //$class=$row['Subject']; 
+                        //$class=$row['Subject'];
                         //$subj = $row['Number'];
 
                         echo "<option value = '$number'>" .$row['Subject'], $row['Number']. "</option>";
-                        $number++; 
+                        $number++;
                     }
                     echo "</select><br>";
                 ?>
@@ -41,18 +41,18 @@
                     <option value = "Friday">Friday</option>
                     <option value = "Saturday">Saturday</option>
                     <option value = "Sunday">Sunday</option>
-                </select><br> 
+                </select><br>
                 <label for="Time">Time(24 Hour)</label><br>
                 <select id="Time" name="Time"><br>
                     <option value ="0000">00:00</option>
                     <option value ="0100">01:00</option>
-                    <option value ="0200">02:00</option>   
+                    <option value ="0200">02:00</option>
                     <option value ="0300">03:00</option>
                     <option value ="0400">04:00</option>
                     <option value ="0500">05:00</option>
                     <option value ="0600">06:00</option>
                     <option value ="0700">07:00</option>
-                    <option value ="0800">08:00</option>   
+                    <option value ="0800">08:00</option>
                     <option value ="0900">09:00</option>
                     <option value ="1000">10:00</option>
                     <option value ="1100">11:00</option>
@@ -69,7 +69,7 @@
                     <option value ="2200">22:00</option>
                     <option value ="2300">23:00</option>
                     <option value ="2400">24:00</option>
-                </select><br> 
+                </select><br>
                 <?php
                     $query = "SELECT Name FROM Building";
                     $result = mysqli_query($con, $query);
