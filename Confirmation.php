@@ -12,7 +12,7 @@
     </head>
 
     <div id="header">
-        <h1><a href="HomePage.html">Beaver Colony</a></h1>
+        <h1><a href="HomePage.php">Beaver Colony</a></h1>
         <h2>Create a Group</h2>
     </div>
     <button id="logoutBtn" type="submit" onclick="window.location.href='Logout.php'">Logout</button>
@@ -61,12 +61,12 @@
             echo "<h1>" . $_GET['Time'] . "</h1>";
 
             //Create new group
-            $query= "INSERT INTO `Group` (`ID`, `NumStudents`, `ModeratorONID`,`Subject`, `Number`, `Section`) 
-            VALUES (NULL,0,'$onid','$subj','$class', '$section')";
+            $query= "INSERT INTO `Group` (`ID`, `NumStudents`, `Subject`, `Number`, `Section`) 
+            VALUES (NULL,0,'$subj','$class', '$section')";
             if(mysqli_query($con, $query)){
-                echo "<br> Succes inserting group";
+                echo "<br>";
             } else{
-                echo "<br> Problem inserting" . mysqli_error($con);
+                echo "<br>" . mysqli_error($con);
             }
     
             //Get group ID of new group
@@ -78,26 +78,26 @@
             $query = "INSERT INTO `Meeting` (`MeetingID`, `Day`, `Time`, `BuildingName`, `GroupID`)
             VALUES (NULL, '$Day', '$Time', '$Building', '$group')";
             if(mysqli_query($con, $query)){
-                echo "<br> Succes inserting group";
+                echo "<br>";
             } else{
-                echo "<br> Problem inserting into Meeting" . mysqli_error($con);
+                echo "<br>" . mysqli_error($con);
             }
 
             //Update number of students in Group
             $query = "UPDATE `Group` SET NumStudents=1 WHERE NumStudents=0";
             //$query = mysqli_query($con, $query);
             if(mysqli_query($con, $query)){
-                echo "<br> Succes inserting group";
+                echo "<br>";
             } else{
-                echo "<br> Problem updating numstudents" . mysqli_error($con);
+                echo "<br>" . mysqli_error($con);
             }
 
             //Put user into participates in
             $query = "INSERT INTO `participates_in` (`ONID`, `GroupID`) VALUES ('$onid', '$group')";
             if(mysqli_query($con, $query)){
-                echo "<br> Succes inserting into participates";
+                echo "<br>";
             } else{
-                echo "<br> Problem inserting into participates in" . mysqli_error();
+                echo "<br>" . mysqli_error($con);
             }
 
             //$query = "SELECT `ID` FROM `Group` INNER JOIN `MEETING` WHERE `Group`.`ID` = `MEETING`.`GroupID`";
