@@ -20,7 +20,7 @@
     <div id="listingBox">
         <div class="listing">
             <?php
-                print_r($_SESSION);
+                
                 $name=$_SESSION['onid'];
                 $query = "SELECT * FROM has where ONID='$name'";
                 $Class = mysqli_query($con, $query);
@@ -32,11 +32,11 @@
                 
                 if(mysqli_query($con, $query))
                 {
-                    echo"<br> Success.";
+                    echo"<br>";
                 }
                 else
                 {
-                    echo "<br> Problem selecting groups" . mysqli_error($con);
+                    echo "<br>";
                 }
                
                 $result = mysqli_query($con, $query);
@@ -65,9 +65,9 @@
                 $newnum = (int)$num + 1;
                 $query = "UPDATE `Group` SET NumStudents='$newnum' WHERE ID='$val'";
                 if(mysqli_query($con, $query)){
-                    echo "<br> Succes inserting group";
+                    echo "<br>";
                 } else{
-                    echo "<br> Problem updating numstudents" . mysqli_error($con);
+                    echo "<br>";
                 }
 
             ?>
