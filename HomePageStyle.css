@@ -15,39 +15,40 @@ h2 {
 }
 
 h3 {
-    display: inline-block;
-    font-weight: 100;
-
+display: inline-flex;
+font-size: smaller;
 }
 
 h4{
     font-size: larger;
     font-weight: bold;
     text-decoration: underline;
+    color: gray;
+    text-align: center;
 }
 
 #logoutBtn{
     position:fixed;
-    right:10px;
-    top:5px;
+    right:25px;
+    top:28px;
     background-color: black;
     color: white;
     border: none;
     font-weight: 100;
-    font-size: small; 
+    font-size: small;
     height: 30px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 #BeaverDescription{
-    background-color: #FFB500;
+    text-align: center;
+    background-color: #ffb429;
     text-align: center;
     width: auto;
-    height: 54px;
     opacity: 0.8;
-    border-radius: 80px;
-
-
+    height: 40px;
+    border-radius: 120px
 }
 
 .GroupDiv{

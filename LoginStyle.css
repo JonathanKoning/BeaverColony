@@ -3,6 +3,13 @@ body{
     background-color: #fff5ee;
 }
 
+h1 {
+  background: url(Rectangle.jpg);
+  text-align: center;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
 #webName{
     text-align: center;
 }
@@ -22,6 +29,7 @@ img{
     opacity: .9;
     filter: grayscale(100%);
     margin-left: 150px;
+    border-radius: 10px;
 }
 
 .formContainer{
@@ -32,6 +40,7 @@ img{
     width: 400px;
     height: 250px;
     padding: 16px;
+    border-radius: 5px;
 }
 
 .formInner{
@@ -58,4 +67,5 @@ button{
     margin-top: 10px;
     color: white;
     cursor: pointer;
+    border-radius: 5px;
 }

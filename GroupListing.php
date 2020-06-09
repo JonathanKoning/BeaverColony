@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once "connect.php";    
+    //require_once "connect.php";
 ?>
 <!DOCTYPE html>
 
@@ -11,14 +11,14 @@
   </head>
 
   <h1><a href="HomePage.php">Beaver Colony</h1>
-  <button id="logoutBtn" type="submit" onclick="window.location.href='Logout.php'">Logout</button>
+  <button id="logoutBtn" onclick="window.location.href='Logout.php'">Logout</button>
   <h3>Course Name</h3>
   <div class="createDiv">
-      <button id="CreateGroupbtn" type="submit" action="CreateGroup.php">Create a Group</a>
+      <button id="CreateGroupbtn" type="submit" onclick="window.location.href='CreateGroup.php'">Create a Group</a>
   </div>
   <div id="filterDiv">
     <?php
-        //require_once "connect.php";
+        require_once "connect.php";
         $onid=$_SESSION['onid'];
         $query = "SELECT Subject, Number FROM has where ONID='$onid'";
         $result = mysqli_query($con, $query);
@@ -28,11 +28,11 @@
         else{
             echo"<br> doesnt work" . mysqli_error($con);
         }*/
-        echo "<form method = 'post' action=''>"; 
-            echo "<label for='classes'>Filter by Class</label><br>";
+        echo "<form method = 'post' action=''>";
+            echo "<label for='classes'>Submit to Filter by Class</label><br>";
             echo "<select name='Class'>";
             $number = 0;
-            echo "<option value='$number'>See All</option>";
+            echo "<option value='$number' id='dropbtn'>View all groups</option>";
             $number = 1;
             while($row = mysqli_fetch_array($result)){
                 $classAbr = $row['Subject'];
@@ -62,25 +62,33 @@
                         $_POST = array();
                     }
                     if((int)$option[0] == 0){
-                        $query = "SELECT * FROM `Group` WHERE (`ID` NOT IN (SELECT `GroupID` FROM `participates_in` WHERE ONID='$name') 
-                        AND `Subject` IN (SELECT `Subject` FROM `has` WHERE ONID='$name') 
-                        AND `SECTION` IN (SELECT `Section` FROM `has` WHERE ONID='$name') 
+                        $query = "SELECT * FROM `Group` WHERE (`ID` NOT IN (SELECT `GroupID` FROM `participates_in` WHERE ONID='$name')
+                        AND `Subject` IN (SELECT `Subject` FROM `has` WHERE ONID='$name')
+                        AND `SECTION` IN (SELECT `Section` FROM `has` WHERE ONID='$name')
                         AND `Number` IN (SELECT `Number` FROM `has` WHERE ONID='$name'))";
                     }
                     else{
-                        $query = "SELECT * FROM `Group` WHERE (`ID` NOT IN (SELECT `GroupID` FROM `participates_in` WHERE ONID='$name') 
-                        AND `Subject` IN (SELECT `Subject` FROM `has` WHERE `Subject`='$option[1]') 
-                        AND `SECTION` IN (SELECT `Section` FROM `has` WHERE ONID='$name') 
+                        $query = "SELECT * FROM `Group` WHERE (`ID` NOT IN (SELECT `GroupID` FROM `participates_in` WHERE ONID='$name')
+                        AND `Subject` IN (SELECT `Subject` FROM `has` WHERE `Subject`='$option[1]')
+                        AND `SECTION` IN (SELECT `Section` FROM `has` WHERE ONID='$name')
                         AND `Number` IN (SELECT `Number` FROM `has` WHERE `Number`='$option[2]'))";
                     }
                     $result = mysqli_query($con, $query);
+
                     while($row = mysqli_fetch_array($result)){
                         $groupID = $row['ID'];
                         $subject = $row['Subject'];
                         $number = $row['Number'];
+                        $query = "SELECT `Day`, `Time`, `BuildingName` FROM `Meeting` WHERE `GroupID`='$groupID'";
+                        $result2 = mysqli_query($con, $query);
+                        $row2 = mysqli_fetch_array($result2);
+                        $day = $row2['Day'];
+                        $time = $row2['Time'];
+                        $bName = $row2['BuildingName'];
                         echo "<form method='post' action=''>";
-                        echo "<input type='hidden' name='join' value='$groupID'>". $group. " ". $subject, $number ."</input>";
-                        echo "<button id='joinButton' value='$group' type='submit'>Join</button>";
+                        echo "<input type='hidden' name='join' value='$groupID'> Group ID:" .$groupID. " ". $subject, $number . " ".
+                        $bName." ".$day. " ". $time."</input>";
+                        echo "<button id='joinButton' value='$groupID' type='submit'>Join</button>";
                         echo "</form>";
                     }
                 }
@@ -99,16 +107,16 @@
                         echo"<br> doesnt work" . mysqli_error($con);
                     }*/
                     $result = mysqli_query($con,$query);
-                    
+
                     //Get number of students from joined group
                     $query = "SELECT `NumStudents` FROM `Group` WHERE ID=$val";
                     $res = mysqli_query($con, $query);
                     $row = mysqli_fetch_array($res);
                     $num = $row['NumStudents'];
-                    
+
                     //Update number of students in group
                     $newnum = (int)$num + 1;
-                    echo"<br> newnum: '$newnum'";
+                    //echo"<br> newnum: '$newnum'";
                     $query = "UPDATE `Group` SET `NumStudents`='$newnum' WHERE `ID`='$val'";
                     /*if(mysqli_query($con, $query)){
                         echo"<br> success";
@@ -117,7 +125,7 @@
                         echo"<br> doesnt work" . mysqli_error($con);
                     }*/
                 }
-                
+
                 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['classChoice']))
                 {
                     Display($con);
