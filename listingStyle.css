@@ -16,7 +16,6 @@ h3 {
   color: gray;
   padding: 0 auto;
   text-align: center;
-
 }
 
 a{
@@ -76,32 +75,32 @@ select {
 
 #listingBox{
   display: inline-block;
-  margin-top: 15px;
+  margin-top: 20px;
   background-color: #FDD26E;
   height: 100%;
   width: 80%;
-  border-radius: 35px;
-
+  border-radius: 15px;
 }
-
 .listing {
-  display: inline-block;
-  width: 90%;
-  height: 50px;
-  margin-top: 2%;
-  margin-right: 2%;
-  margin-bottom: 2%;
-  background-color: #FFB400;
-  color: black;
+  margin: 1%;
+  background-color: #FFB500;
+  border-radius: 5px;
 }
-
 #joinButton{
-  background-color: black;
-  border: none;
+  position: relative;
+  right: 0px;
+  background-color: gray;
+  border: 1px solid white;
   color: white;
-  height: 50px;
-  width: 60px;
-  float: right;
+  height: 30px;
+  width: 40px;
+  border-radius: 5px;
+  margin-left: 20px;
+  margin-top: 2px;
+
+}
+form{
+  display: block;
 }
 
 button:hover{
