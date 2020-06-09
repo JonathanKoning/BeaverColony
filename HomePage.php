@@ -39,9 +39,9 @@
                         $class = $grp['Number'];
                         $peeps = $grp['NumStudents'];
                         echo"<form method='post' action='#'>";
-                        
+
                         echo "<input type='hidden' name='leave' value='$group'>". $group. "<br>". $subj, $class . "<br> Size: ". $peeps ."</input>";
-    
+
                         echo"<button title='Remove group' id='removeBtn' value='$group' type='submit'>-</button>";
                         echo"</form>";
                         echo"</div>";
@@ -51,8 +51,8 @@
                 //{
                   //  Remove();
                 //}
-                function Remove($con) 
-                { 
+                function Remove($con)
+                {
                     //echo"<br> Remove function called";
                     $val = $_POST['leave'];
                     $name = $_SESSION['onid'];
@@ -70,7 +70,7 @@
                     $query = "SELECT `NumStudents` FROM `Group` WHERE `ID`='$val'";
                     if(mysqli_query($con, $query))
                     {
-                        //echo"<br>NumStudents success"; 
+                        //echo"<br>NumStudents success";
                     }
                     else
                     {
@@ -79,9 +79,9 @@
                     $res = mysqli_query($con, $query);
                     $row = mysqli_fetch_array($res);
                     $num = $row['NumStudents'];
-                
+
                     //Update number of students in group
-                    
+
                     //echo"<br> $num";
                     $newnum = (int)$num-1;
                    // echo"<br> $num";

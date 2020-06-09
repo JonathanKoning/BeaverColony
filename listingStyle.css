@@ -12,8 +12,11 @@ h1 {
 }
 
 h3 {
-  text-align: center;
+  position: relative;
   color: gray;
+  padding: 0 auto;
+  text-align: center;
+
 }
 
 a{
@@ -23,15 +26,16 @@ a{
 
 #logoutBtn{
     position:fixed;
-    right:10px;
-    top:5px;
+    right:25px;
+    top:28px;
     background-color: black;
     color: white;
     border: none;
     font-weight: 100;
-    font-size: small; 
+    font-size: small;
     height: 30px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .create {
@@ -39,21 +43,45 @@ a{
 }
 
 #CreateGroupbtn{
-  margin-top: 15px;
+  position: relative;
+  margin-bottom: 40px;
   background-color: #FFB500;
   border: none;
-  width: 200px;
-  height: 50px;
+  width: 160px;
+  height: 45px;
   border-radius: 25px;
+  cursor: pointer;
+}
+
+#submitBtn {
+  border: none;
+  background-color: gray;
+  width: 100px;
+  height: 25px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+#dropbtn{
+  display: none;
+}
+
+select {
+  border: 1px solid black;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 #listingBox{
   display: inline-block;
-  margin-top: 40px;
+  margin-top: 15px;
   background-color: #FDD26E;
   height: 100%;
   width: 80%;
-  border-radius: 15px;
+  border-radius: 35px;
+
 }
 
 .listing {
@@ -63,7 +91,7 @@ a{
   margin-top: 2%;
   margin-right: 2%;
   margin-bottom: 2%;
-  background-color: #FFB500;
+  background-color: #FFB400;
   color: black;
 }
 

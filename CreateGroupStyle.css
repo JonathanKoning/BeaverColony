@@ -24,15 +24,16 @@ h2{
 
 #logoutBtn{
     position:fixed;
-    right:10px;
-    top:5px;
+    right:25px;
+    top:28px;
     background-color: black;
     color: white;
     border: none;
     font-weight: 100;
-    font-size: small; 
+    font-size: small;
     height: 30px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 #formDiv{
