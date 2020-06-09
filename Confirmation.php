@@ -18,17 +18,17 @@
     <button id="logoutBtn" type="submit" onclick="window.location.href='Logout.php'">Logout</button>
     <div id="formDiv">
         <form>
-          
+
     <body>
         <?php
             $counter=0;
             $number = $_GET['Class'];
-           
+
             $onid=$_SESSION['onid'];
             require_once "connect.php";
             $query = "SELECT Subject, Number, Section FROM has where ONID='$onid'";
-            $result = mysqli_query($con, $query);               
-            
+            $result = mysqli_query($con, $query);
+
 
             while($row = mysqli_fetch_array($result)){
                 if($counter == (int)$number){
@@ -39,10 +39,10 @@
                 $counter++;
             }
             echo"<div class='box'>";
-            echo "<h3>" . "$class" . "</h3>";
+            echo "<h3>" .$subj. $class . "</h3>";
 
             $Day=$_GET['Day'];
-            echo "<h3>" . $_GET['Day'] . "</h3>";
+            echo "<h3>" ."on ". $_GET['Day'] . "</h3>";
             //$Day=$_GET['Day'];
 
             $number=$_GET['bname'];
@@ -55,26 +55,27 @@
                 }
                 $counter++;
             }
-            echo "<h1>" . $Building . "</h1>"; 
-            
+            echo "<h3>" ."@". $Building . "</h3>";
+
             $Time=$_GET['Time'];
-            echo "<h1>" . $_GET['Time'] . "</h1>";
+            echo "<h3>" ."Time: ". $_GET['Time'] . "</h3>";
 
             //Create new group
-            $query= "INSERT INTO `Group` (`ID`, `NumStudents`, `Subject`, `Number`, `Section`) 
+            $query= "INSERT INTO `Group` (`ID`, `NumStudents`, `Subject`, `Number`, `Section`)
             VALUES (NULL,0,'$subj','$class', '$section')";
             if(mysqli_query($con, $query)){
                 echo "<br>";
             } else{
                 echo "<br>" . mysqli_error($con);
             }
-    
+
             //Get group ID of new group
             $query = "SELECT ID FROM `Group` WHERE NumStudents = 0";
             $GID = mysqli_query($con, $query);
             $row = mysqli_fetch_array($GID);
             $group = $row['ID'];
-            echo "<h1>" .$group . "</h1>";
+
+            echo "<h3>" ."Group ID: ".$group . "</h3>";
             $query = "INSERT INTO `Meeting` (`MeetingID`, `Day`, `Time`, `BuildingName`, `GroupID`)
             VALUES (NULL, '$Day', '$Time', '$Building', '$group')";
             if(mysqli_query($con, $query)){
@@ -108,7 +109,7 @@
             //{
               //  echo"<h1>". $row['ID'] ."</h1>";
             //}
-            
+
 
         ?>
 
