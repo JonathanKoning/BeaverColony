@@ -85,20 +85,9 @@
                         $day = $row2['Day'];
                         $time = $row2['Time'];
                         $bName = $row2['BuildingName'];
-                        $query = "SELECT `NumStudents` FROM `Group` WHERE `ID`='$groupID'";
-                        /*if(mysqli_query($con, $query)){
-                        echo"<br> success";
-                        }
-                            else{
-                            echo"<br> doesnt work" . mysqli_error($con);
-                        }*/
-                        $result3 = mysqli_query($con, $query);
-                        $row3 = mysqli_fetch_array($result3);
-                        $size = $row3['NumStudents'];
-                        //echo "<br> size: $size";
                         echo "<form method='post' action=''>";
                         echo "<input type='hidden' name='join' value='$groupID'> Group ID:" .$groupID. " ". $subject, $number . " ".
-                        $bName." ".$day. " ". $time."&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp". $size."</input>";
+                        $bName." ".$day. " ". $time."</input>";
                         echo "<button id='joinButton' value='$group' type='submit'>Join</button>";
                         echo "</form>";
                     }
@@ -152,3 +141,4 @@
         </div>
     </body>
 </html>
+

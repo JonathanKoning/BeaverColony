@@ -1,7 +1,7 @@
 <?php
     session_start();
 ?>
-                <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="HomePageStyle.css">
@@ -38,11 +38,22 @@
                         $subj = $grp['Subject'];
                         $class = $grp['Number'];
                         $peeps = $grp['NumStudents'];
-                        echo"<form method='post' action='#'>";
+                        $query = "SELECT `Day`, `Time`, `BuildingName` FROM `Meeting` WHERE `GroupID`='$group'";
+                        $result2 = mysqli_query($con, $query);
+                        $row2 = mysqli_fetch_array($result2);
+                        $day = $row2['Day'];
+                        $time = $row2['Time'];
+                        $bName = $row2['BuildingName'];
+                        echo "Group ID: $group <br>Class: $subj $class <br>Size: $peeps <br>Building: $bName <br>Day: $day <br>Time: $time";
 
-                        echo "<input type='hidden' name='leave' value='$group'>". $group. "<br>". $subj, $class . "<br> Size: ". $peeps ."</input>";
-
-                        echo"<button title='Remove group' id='removeBtn' value='$group' type='submit'>-</button>";
+                        //echo "Group ID: $group <br>Class: $subj $class <br>Size: $peeps <br> Building: $day";
+                        echo"<form id='editForm' method='post' action='EditGroup.php'>";
+                            echo "<input type='hidden' name='edit' value='$group'></input>";
+                            echo"<button title='Edit group' id='editBtn' value='$group' type='submit'>Edit</button>";
+                        echo"</form>";
+                        echo"<form id='removeForm' method='post' action='#'>";
+                            echo "<input type='hidden' name='leave' value='$group'></input>";
+                            echo"<button title='Remove group' id='removeBtn' value='$group' type='submit'>Delete</button>";
                         echo"</form>";
                         echo"</div>";
                     }
@@ -51,8 +62,12 @@
                 //{
                   //  Remove();
                 //}
-                function Remove($con)
-                {
+                function Edit($con){
+                    $val = $_POST['edit'];
+                }
+                
+                function Remove($con) 
+                { 
                     //echo"<br> Remove function called";
                     $val = $_POST['leave'];
                     $name = $_SESSION['onid'];
@@ -70,7 +85,7 @@
                     $query = "SELECT `NumStudents` FROM `Group` WHERE `ID`='$val'";
                     if(mysqli_query($con, $query))
                     {
-                        //echo"<br>NumStudents success";
+                        //echo"<br>NumStudents success"; 
                     }
                     else
                     {
@@ -79,9 +94,9 @@
                     $res = mysqli_query($con, $query);
                     $row = mysqli_fetch_array($res);
                     $num = $row['NumStudents'];
-
+                
                     //Update number of students in group
-
+                    
                     //echo"<br> $num";
                     $newnum = (int)$num-1;
                    // echo"<br> $num";
@@ -125,10 +140,15 @@
                 }
                 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['leave']))
                 {
-                    //echo"<br> get method called";
                     Remove($con);
                     $_POST = array();
-                    //Draw($con);
+                }
+                if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['edit']))
+                {
+                    print_r($_POST);
+                    $_SESSION["edit"]=$_POST['edit'];
+                    Edit($con);
+                    //$_POST = array();
                 }
                 Draw($con);
                 mysqli_close($con);
@@ -142,3 +162,4 @@
         </div>
     </body>
 </html>
+
