@@ -73,7 +73,7 @@ session_start();
                     {
                         $_SESSION["edit"] = $_POST["edit"];
                     }
-                    print_r($_SESSION);
+                    //print_r($_SESSION);
 
                     function makeEdit($con){
                         echo"<br> In function";
