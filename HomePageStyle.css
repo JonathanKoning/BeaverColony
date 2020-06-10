@@ -6,7 +6,7 @@ h1 {
     background: url(Rectangle.jpg);
     text-align: center;
     -webkit-text-fill-color: transparent;
-      -webkit-background-clip: text;
+ 	  -webkit-background-clip: text;
 }
 
 h2 {
@@ -15,39 +15,40 @@ h2 {
 }
 
 h3 {
-    display: inline-block;
-    font-weight: 100;
-
+display: inline-flex;
+font-size: smaller;
 }
 
 h4{
     font-size: larger;
     font-weight: bold;
     text-decoration: underline;
+    color: gray;
+    text-align: center;
 }
 
 #logoutBtn{
     position:fixed;
-    right:10px;
-    top:5px;
+    right:25px;
+    top:28px;
     background-color: black;
     color: white;
     border: none;
     font-weight: 100;
-    font-size: small; 
+    font-size: small;
     height: 30px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 #BeaverDescription{
-    background-color: #FFB500;
+    text-align: center;
+    background-color: #ffb429;
     text-align: center;
     width: auto;
-    height: 54px;
     opacity: 0.8;
-    border-radius: 80px;
-
-
+    height: 40px;
+    border-radius: 120px
 }
 
 .GroupDiv{
@@ -58,22 +59,16 @@ h4{
 .box{
     text-align: center;
     position: relative;
-    width: 300px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     background-color: #ff8243;
     display: inline-block;
     margin: 3%;
     border-radius: 5px;
 }
 
-#editForm {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
-
-#removeForm {
-    position: absolute;
+form {
+    position: relative;
     height: 100%;
     bottom: 0;
     right: 0;
@@ -94,20 +89,6 @@ button:hover{
     cursor: pointer;
     bottom: 0;
     right: 0;
-    border-radius: 5px;
-}
-
-#editBtn{
-    position: absolute;
-    background-color: black;
-    color: white;
-    border: none;
-    font-weight: 300;
-    font-size: large;
-    height: 20px;
-    cursor: pointer;
-    bottom: 0;
-    left: 0;
     border-radius: 5px;
 }
 
@@ -140,4 +121,3 @@ button:hover{
     cursor: pointer;
     border-radius: 15px;
 }
-
