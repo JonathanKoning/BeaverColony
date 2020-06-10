@@ -1,143 +1,153 @@
 <?php
     session_start();
+    //require_once "connect.php";    
 ?>
-                <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="HomePageStyle.css">
-    </head>
-    <body>
-        <h1>Beaver Colony</h1>
-        <button id="logoutBtn" type="submit" onclick="window.location.href='Logout.php'">Logout</button>
-        <h2>Home</h2>
-        <div id="BeaverDescription">
-            <h3>A resource to collaborate, help, and connect with others to further the success of your academic carreer</h3>
-        </div>
+<!DOCTYPE html>
 
-        <div class="GroupDiv">
-            <h4>Your Groups</h4>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="listingStyle.css">
+  </head>
+
+  <h1><a href="HomePage.php">Beaver Colony</h1>
+  <button id="logoutBtn" onclick="window.location.href='Logout.php'">Logout</button>
+  <h3>Course Name</h3>
+  <div class="createDiv">
+      <button id="CreateGroupbtn" type="submit" onclick="window.location.href='CreateGroup.php'">Create a Group</a>
+  </div>
+  <div id="filterDiv">
+    <?php
+        require_once "connect.php";
+        $onid=$_SESSION['onid'];
+        $query = "SELECT Subject, Number FROM has where ONID='$onid'";
+        $result = mysqli_query($con, $query);
+        /*if(mysqli_query($con, $query)){
+            echo"<br> success";
+        }
+        else{
+            echo"<br> doesnt work" . mysqli_error($con);
+        }*/
+        echo "<form method = 'post' action=''>"; 
+            echo "<label for='classes'>Filter by Class</label><br>";
+            echo "<select name='Class'>";
+            $number = 0;
+            echo "<option value='$number'>See All</option>";
+            $number = 1;
+            while($row = mysqli_fetch_array($result)){
+                $classAbr = $row['Subject'];
+                $classNum = $row['Number'];
+                echo "<option value = '$number|$classAbr|$classNum'>" .$row['Subject'], $row['Number']. "</option>";
+                $number++;
+            }
+            echo "</select><br>";
+            echo "<input type='submit' name='classChoice' id='submitBtn'/>";
+        echo "</form>";
+    ?>
+  </div>
+
+  <body>
+    <div id="listingBox">
+        <div class="listing">
             <?php
-                require_once "connect.php";
-                function Draw($con){
-
-                    if($_SESSION['onid'])
+                //require_once "connect.php";
+                function Display($con){
+                    $name=$_SESSION['onid'];
+                    $option = explode('|', $_POST['Class']);
+                    /*echo"<br> '$option[0]'";
+                    echo"<br> '$option[1]'";
+                    echo"<br> '$option[2]'";*/
+                    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['classChoice']))
                     {
-                        $name=$_SESSION['onid'];
+                        $_POST = array();
                     }
-                    //echo"<br> $name";
-                    $query = "SELECT * FROM participates_in where ONID='$name'";
+                    if((int)$option[0] == 0){
+                        $query = "SELECT * FROM `Group` WHERE (`ID` NOT IN (SELECT `GroupID` FROM `participates_in` WHERE ONID='$name') 
+                        AND `Subject` IN (SELECT `Subject` FROM `has` WHERE ONID='$name') 
+                        AND `SECTION` IN (SELECT `Section` FROM `has` WHERE ONID='$name') 
+                        AND `Number` IN (SELECT `Number` FROM `has` WHERE ONID='$name'))";
+                    }
+                    else{
+                        $query = "SELECT * FROM `Group` WHERE (`ID` NOT IN (SELECT `GroupID` FROM `participates_in` WHERE ONID='$name') 
+                        AND `Subject` IN (SELECT `Subject` FROM `has` WHERE `Subject`='$option[1]') 
+                        AND `SECTION` IN (SELECT `Section` FROM `has` WHERE ONID='$name') 
+                        AND `Number` IN (SELECT `Number` FROM `has` WHERE `Number`='$option[2]'))";
+                    }
                     $result = mysqli_query($con, $query);
-                    while($row = mysqli_fetch_array($result))
-                    {
-                        echo"<div class='box'>";
-                        //echo"<p>". $row['GroupID']."<p>";
-                        $group = $row['GroupID'];
-                        $query = "SELECT * FROM `Group` WHERE ID='$group'";
-                        $res = mysqli_query($con, $query);
-                        $grp = mysqli_fetch_array($res);
-                        $subj = $grp['Subject'];
-                        $class = $grp['Number'];
-                        $peeps = $grp['NumStudents'];
-                        echo"<form method='post' action='#'>";
-
-                        echo "<input type='hidden' name='leave' value='$group'>". $group. "<br>". $subj, $class . "<br> Size: ". $peeps ."</input>";
-
-                        echo"<button title='Remove group' id='removeBtn' value='$group' type='submit'>-</button>";
-                        echo"</form>";
-                        echo"</div>";
+                    
+                    while($row = mysqli_fetch_array($result)){
+                        $groupID = $row['ID'];
+                        $subject = $row['Subject'];
+                        $number = $row['Number'];
+                        $query = "SELECT `Day`, `Time`, `BuildingName` FROM `Meeting` WHERE `GroupID`='$groupID'";
+                        $result2 = mysqli_query($con, $query);
+                        $row2 = mysqli_fetch_array($result2);
+                        $day = $row2['Day'];
+                        $time = $row2['Time'];
+                        $bName = $row2['BuildingName'];
+                        $query = "SELECT `NumStudents` FROM `Group` WHERE `ID`='$groupID'";
+                        /*if(mysqli_query($con, $query)){
+                        echo"<br> success";
+                        }
+                            else{
+                            echo"<br> doesnt work" . mysqli_error($con);
+                        }*/
+                        $result3 = mysqli_query($con, $query);
+                        $row3 = mysqli_fetch_array($result3);
+                        $size = $row3['NumStudents'];
+                        //echo "<br> size: $size";
+                        echo "<form method='post' action=''>";
+                        echo "<input type='hidden' name='join' value='$groupID'> Group ID:" .$groupID. " ". $subject, $number . " ".
+                        $bName." ".$day. " ". $time."&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp". $size."</input>";
+                        echo "<button id='joinButton' value='$group' type='submit'>Join</button>";
+                        echo "</form>";
                     }
                 }
-                //if($_SERVER['REQUEST_METHOD'] == "GET" and isset($_GET['leave']))
-                //{
-                  //  Remove();
-                //}
-                function Remove($con)
-                {
-                    //echo"<br> Remove function called";
-                    $val = $_POST['leave'];
-                    $name = $_SESSION['onid'];
-                    //print_r($val);
-                    $query = "DELETE FROM `participates_in` WHERE `ONID`='$name' AND `GroupID`='$val'";
-                    if(mysqli_query($con, $query)){
-                        //echo"<br>";
-                    }
-                    else
-                    {
-                        //echo"<br> participates in ". mysqli_error($con);
-                    }
 
-
-                    $query = "SELECT `NumStudents` FROM `Group` WHERE `ID`='$val'";
-                    if(mysqli_query($con, $query))
-                    {
-                        //echo"<br>NumStudents success";
+                function joinGroup($con){
+                    $name=$_SESSION['onid'];
+                    /*echo"<br> '$name'";
+                    print_r('$_POST');*/
+                    $val = $_POST['join'];
+                    //echo"<br> '$val'";
+                    $query = "INSERT INTO `participates_in` (`ONID`, `GroupID`) VALUES ('$name', '$val')";
+                    /*if(mysqli_query($con, $query)){
+                        echo"<br> success";
                     }
-                    else
-                    {
-                        //echo"<br> NumStudents ". mysqli_error($con);
-                    }
+                    else{
+                        echo"<br> doesnt work" . mysqli_error($con);
+                    }*/
+                    $result = mysqli_query($con,$query);
+                    
+                    //Get number of students from joined group
+                    $query = "SELECT `NumStudents` FROM `Group` WHERE ID=$val";
                     $res = mysqli_query($con, $query);
                     $row = mysqli_fetch_array($res);
                     $num = $row['NumStudents'];
-
+                    
                     //Update number of students in group
-
-                    //echo"<br> $num";
-                    $newnum = (int)$num-1;
-                   // echo"<br> $num";
-                    //echo"<br> $newnum";
-                    if($newnum <= 0)
-                    {
-                        $query = "DELETE FROM `Meeting` WHERE GroupID='$val'";
-                        if(mysqli_query($con, $query))
-                        {
-                            //echo"<br> Meeting Removed";
-                        }
-                        else
-                        {
-                            echo"<br> Delete meeting". mysqli_error($con);
-                        }
-                        $query = "DELETE FROM `Group` WHERE ID='$val'";
-                        if(mysqli_query($con, $query))
-                        {
-                            //echo"<br>Group Removed";
-                        }
-                        else
-                        {
-                            //echo"<br> Remove group ". mysqli_error($con);
-                        }
+                    $newnum = (int)$num + 1;
+                    //echo"<br> newnum: '$newnum'";
+                    $query = "UPDATE `Group` SET `NumStudents`='$newnum' WHERE `ID`='$val'";
+                    /*if(mysqli_query($con, $query)){
+                        echo"<br> success";
                     }
-                    else
-                    {
-                        $query = "UPDATE `Group` SET NumStudents='$newnum' WHERE ID='$val'";
-                        if(mysqli_query($con, $query))
-                        {
-                            //echo "<br> num students success";
-                        }
-                        else
-                        {
-                            //echo "<br>";
-
-                           // echo"<br> update num students " . mysqli_error($con);
-                        }
-                    }
-                    //echo "<meta http-equiv='refresh' content='0'>";
+                    else{
+                        echo"<br> doesnt work" . mysqli_error($con);
+                    }*/
                 }
-                if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['leave']))
+                
+                if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['classChoice']))
                 {
-                    //echo"<br> get method called";
-                    Remove($con);
-                    $_POST = array();
-                    //Draw($con);
+                    Display($con);
                 }
-                Draw($con);
-                mysqli_close($con);
+                if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['join']))
+                {
+                    joinGroup($con);
+                    Display($con);
+                    $_POST = array();
+                }
             ?>
-        </div>
-        <div id="outerBtnDiv">
-            <div id="innerBtnDiv">
-                <button id="ListBtn" type="submit" onclick="window.location.href='GroupListing.php'">Search Groups</button>
-                <button id="CreateBtn" type="submit" onclick="window.location.href='CreateGroup.php'">Create Group</button>
             </div>
         </div>
     </body>
