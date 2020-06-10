@@ -76,16 +76,16 @@ session_start();
                     //print_r($_SESSION);
 
                     function makeEdit($con){
-                        echo"<br> In function";
+                        //echo"<br> In function";
                         $val = $_SESSION["edit"];
-                        echo"<br>$val";
+                        //echo"<br>$val";
                         //get new meeting information
                         $Day=$_GET['Day'];
-                        echo"<br>$Day";
+                        //echo"<br>$Day";
                         $Time=$_GET['Time'];
-                        echo"<br>Time";
+                        //echo"<br>$Time";
                         $number=$_GET['bname'];
-                        echo"<br>$number";
+                        //echo"<br>$number";
                         $query = "SELECT Name FROM Building";
                         $result = mysqli_query($con, $query);
                         $counter=0;
@@ -96,19 +96,31 @@ session_start();
                             $counter++;
                         }
                         //Update Information
-                        $query = "UPDATE `Meeting` SET `Day`='$Day', `Time`='$Time', `BuildingName`='$Building' 
+                        $query = "UPDATE `Meeting` SET `Day`='$Day', `Time`='$Time', `BuildingName`='$number' 
                         WHERE `GroupID`= '$val'";
+                        if(mysqli_query($con, $query))
+                        {
+                            //echo"<br> update successful";
+                        }
+                        else
+                        {
+                            //echo"<br update failed".mysqli_error($con);
+                        }
+                        unset($_SESSION["edit"]);
                     }
                     if($_SERVER['REQUEST_METHOD'] == "GET" and isset($_GET['bname']))
                     {
-                        echo"<br> in if statement";
+                        //echo"<br> in if statement";
                         makeEdit($con);
                         $_Get = array();
                     }
                 ?>
                 <div id="buttonDiv">
-                    <button type="submit" id="submitButton">Edit Meeting</button>
+                    <button type="submit" class="submitButton">Edit Meeting</button>
                 </div>
+            </form>
+            <form action="HomePage.php">
+                <button type="submit" class="submitButton" id="homeButton">Back To Home</button>
             </form>
         </div>
     </body>
