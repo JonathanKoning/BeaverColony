@@ -1,6 +1,6 @@
 <?php
     session_start();
-    //require_once "connect.php";
+    //require_once "connect.php";    
 ?>
 <!DOCTYPE html>
 
@@ -28,11 +28,11 @@
         else{
             echo"<br> doesnt work" . mysqli_error($con);
         }*/
-        echo "<form method = 'post' action=''>";
-            echo "<label for='classes'>Submit to Filter by Class</label><br>";
+        echo "<form method = 'post' action=''>"; 
+            echo "<label for='classes'>Filter by Class</label><br>";
             echo "<select name='Class'>";
             $number = 0;
-            echo "<option value='$number' id='dropbtn'>View all groups</option>";
+            echo "<option value='$number'>See All</option>";
             $number = 1;
             while($row = mysqli_fetch_array($result)){
                 $classAbr = $row['Subject'];
@@ -62,19 +62,19 @@
                         $_POST = array();
                     }
                     if((int)$option[0] == 0){
-                        $query = "SELECT * FROM `Group` WHERE (`ID` NOT IN (SELECT `GroupID` FROM `participates_in` WHERE ONID='$name')
-                        AND `Subject` IN (SELECT `Subject` FROM `has` WHERE ONID='$name')
-                        AND `SECTION` IN (SELECT `Section` FROM `has` WHERE ONID='$name')
+                        $query = "SELECT * FROM `Group` WHERE (`ID` NOT IN (SELECT `GroupID` FROM `participates_in` WHERE ONID='$name') 
+                        AND `Subject` IN (SELECT `Subject` FROM `has` WHERE ONID='$name') 
+                        AND `SECTION` IN (SELECT `Section` FROM `has` WHERE ONID='$name') 
                         AND `Number` IN (SELECT `Number` FROM `has` WHERE ONID='$name'))";
                     }
                     else{
-                        $query = "SELECT * FROM `Group` WHERE (`ID` NOT IN (SELECT `GroupID` FROM `participates_in` WHERE ONID='$name')
-                        AND `Subject` IN (SELECT `Subject` FROM `has` WHERE `Subject`='$option[1]')
-                        AND `SECTION` IN (SELECT `Section` FROM `has` WHERE ONID='$name')
+                        $query = "SELECT * FROM `Group` WHERE (`ID` NOT IN (SELECT `GroupID` FROM `participates_in` WHERE ONID='$name') 
+                        AND `Subject` IN (SELECT `Subject` FROM `has` WHERE `Subject`='$option[1]') 
+                        AND `SECTION` IN (SELECT `Section` FROM `has` WHERE ONID='$name') 
                         AND `Number` IN (SELECT `Number` FROM `has` WHERE `Number`='$option[2]'))";
                     }
                     $result = mysqli_query($con, $query);
-
+                    
                     while($row = mysqli_fetch_array($result)){
                         $groupID = $row['ID'];
                         $subject = $row['Subject'];
@@ -88,7 +88,7 @@
                         echo "<form method='post' action=''>";
                         echo "<input type='hidden' name='join' value='$groupID'> Group ID:" .$groupID. " ". $subject, $number . " ".
                         $bName." ".$day. " ". $time."</input>";
-                        echo "<button id='joinButton' value='$groupID' type='submit'>Join</button>";
+                        echo "<button id='joinButton' value='$group' type='submit'>Join</button>";
                         echo "</form>";
                     }
                 }
@@ -107,13 +107,13 @@
                         echo"<br> doesnt work" . mysqli_error($con);
                     }*/
                     $result = mysqli_query($con,$query);
-
+                    
                     //Get number of students from joined group
                     $query = "SELECT `NumStudents` FROM `Group` WHERE ID=$val";
                     $res = mysqli_query($con, $query);
                     $row = mysqli_fetch_array($res);
                     $num = $row['NumStudents'];
-
+                    
                     //Update number of students in group
                     $newnum = (int)$num + 1;
                     //echo"<br> newnum: '$newnum'";
@@ -125,7 +125,7 @@
                         echo"<br> doesnt work" . mysqli_error($con);
                     }*/
                 }
-
+                
                 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['classChoice']))
                 {
                     Display($con);
