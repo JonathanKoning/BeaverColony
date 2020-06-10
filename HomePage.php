@@ -53,7 +53,7 @@
                         echo"</form>";
                         echo"<form id='removeForm' method='post' action='#'>";
                             echo "<input type='hidden' name='leave' value='$group'></input>";
-                            echo"<button title='Remove group' id='removeBtn' value='$group' type='submit'>Delete</button>";
+                            echo"<button title='Remove group' id='removeBtn' value='$group' type='submit'>Leave</button>";
                         echo"</form>";
                         echo"</div>";
                     }
