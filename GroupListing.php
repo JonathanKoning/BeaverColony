@@ -88,7 +88,7 @@
                         echo "<form method='post' action=''>";
                         echo "<input type='hidden' name='join' value='$groupID'> Group ID:" .$groupID. " ". $subject, $number . " ".
                         $bName." ".$day. " ". $time."</input>";
-                        echo "<button id='joinButton' value='$group' type='submit'>Join</button>";
+                        echo "<button id='joinButton' value='$groupID' type='submit'>Join</button>";
                         echo "</form>";
                     }
                 }
